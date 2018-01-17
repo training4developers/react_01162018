@@ -1,20 +1,24 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
-export class ColorViewRow extends React.Component {
+export const ColorViewRow = props => {
 
-  // removeColor = () => {
-  //   this.props.onRemoveColor(this.props.color.id);
-  // }
+  const editColor = () => props.onEditColor(props.color.id);
 
-  render() {
-    return <tr>
-      <td>{this.props.color.name}</td>
-      <td>{this.props.color.hexCode}</td>
-      <td>
-        <button type="button" onClick={() => this.props.onRemoveColor(this.props.color.id)}>Delete</button>
-        <button type="button" onClick={() => this.props.onEditColor(this.props.color.id)}>Edit</button>
-      </td>
-    </tr>;
-  }
+  return <tr>
+    <td>{props.color.name}</td>
+    <td>{props.color.hexCode}</td>
+    <td>
+      <button type="button" onClick={() => props.onRemoveColor(props.color.id)}>Delete</button>
+      <button type="button" onClick={editColor}>Edit</button>
+    </td>
+  </tr>;
+};
 
-}
+ColorViewRow.propTypes = {
+  color: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    hexCode: PropTyoes.string.isRequired,
+  }).isRequired,
+};

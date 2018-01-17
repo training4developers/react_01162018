@@ -1,48 +1,27 @@
 import * as React from 'react';
 
-export class ColorEditRow extends React.Component {
+export const ColorEditRow = props => {
 
-  constructor(props) {
-    super(props);
+  let colorNameInput;
+  let colorHexCodeInput;
 
-    this.state = {
-      name: props.color.name,
-      hexCode: props.color.hexCode,
-    };
-  }
-
-  onChange = e => {
-    this.setState({
-      [ e.target.name ]: e.target.value,
+  const saveColor = () => {
+    props.onSaveColor({
+      id: props.color.id,
+      name: colorNameInput.value,
+      hexCode: colorHexCodeInput.value,
     });
   };
 
-  saveColor = () => {
-    // this.props.onSaveColor({
-    //   id: this.props.color.id,
-    //   name: this.state.name,
-    //   hexCode: this.state.hexCode,
-    // });
-
-    this.props.onSaveColor({
-      id: this.props.color.id,
-      ...this.state,
-    });
-  }
-
-  render() {
-
-    return <tr>
-      <td><input type="text" name="name" value={this.state.name} onChange={this.onChange} /></td>
-      <td><input type="text" name="hexCode" value={this.state.hexCode} onChange={this.onChange} /></td>
-      <td>
-        <button type="button" onClick={this.saveColor}>Save</button>
-        <button type="button" onClick={this.props.onCancelColor}>Cancel</button>
-      </td>
-    </tr>;
-
-
-  }
-
+  return <tr>
+    <td><input type="text" 
+      defaultValue={props.color.name} ref={input => colorNameInput = input} /></td>
+    <td><input type="text"
+      defaultValue={props.color.hexCode} ref={input => colorHexCodeInput = input} /></td>
+    <td>
+      <button type="button" onClick={saveColor}>Save</button>
+      <button type="button" onClick={props.onCancelColor}>Cancel</button>
+    </td>
+  </tr>;
 
 }

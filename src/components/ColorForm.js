@@ -1,6 +1,16 @@
 import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
 export class ColorForm extends React.Component {
+
+  static propTypes = {
+    onSubmitColor: PropTypes.func.isRequired,
+    buttonText: PropTypes.string,
+  };
+
+  static defaultProps = {
+    buttonText: 'Submit Color',
+  };
 
   constructor(props) {
     super(props);

@@ -3,29 +3,22 @@ import * as React from 'react';
 import { ColorViewRow } from './ColorViewRow'; 
 import { ColorEditRow } from './ColorEditRow'; 
 
-export class ColorTable extends React.Component {
-
-  render() {
-
-    return <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>HexCode</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {this.props.colors.map(color => (this.props.editRowId === color.id)
-          ? <ColorEditRow color={color}
-              onSaveColor={this.props.onSaveColor}
-              onCancelColor={this.props.onCancelColor} />
-          : <ColorViewRow color={color}
-              onEditColor={this.props.onEditColor}
-              onRemoveColor={this.props.onRemoveColor} />
-        )}
-      </tbody>
-    </table>;
-  }
-
-}
+export const ColorTable = props => <table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>HexCode</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {props.colors.map(color => (props.editRowId === color.id)
+      ? <ColorEditRow color={color}
+          onSaveColor={props.onSaveColor}
+          onCancelColor={props.onCancelColor} />
+      : <ColorViewRow color={color}
+          onEditColor={props.onEditColor}
+          onRemoveColor={props.onRemoveColor} />
+    )}
+  </tbody>
+</table>;

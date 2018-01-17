@@ -11,10 +11,12 @@ export class ColorTable extends React.Component {
         <tr>
           <th>Name</th>
           <th>HexCode</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        {this.props.colors.map(color => <ColorViewRow color={color} />)}
+        {this.props.colors.map(color => <ColorViewRow color={color}
+          onRemoveColor={this.props.onRemoveColor} />)}
       </tbody>
     </table>;
   }

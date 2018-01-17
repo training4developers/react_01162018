@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { ColorViewRow } from './ColorViewRow'; 
+import { ColorEditRow } from './ColorEditRow'; 
 
 export class ColorTable extends React.Component {
 
@@ -15,8 +16,14 @@ export class ColorTable extends React.Component {
         </tr>
       </thead>
       <tbody>
-        {this.props.colors.map(color => <ColorViewRow color={color}
-          onRemoveColor={this.props.onRemoveColor} />)}
+        {this.props.colors.map(color => (this.props.editRowId === color.id)
+          ? <ColorEditRow color={color}
+              onSaveColor={this.props.onSaveColor}
+              onCancelColor={this.props.onCancelColor} />
+          : <ColorViewRow color={color}
+              onEditColor={this.props.onEditColor}
+              onRemoveColor={this.props.onRemoveColor} />
+        )}
       </tbody>
     </table>;
   }

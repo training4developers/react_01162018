@@ -11,6 +11,7 @@ export class ColorTool extends React.Component {
 
     this.state = {
       colors: this.props.colors.concat(),
+      editRowId: -1,
     };
   }
 
@@ -30,15 +31,42 @@ export class ColorTool extends React.Component {
         ...this.state.colors.slice(colorIndex + 1)
       ],
     });
+  }
 
+  editColor = (colorId) => {
+    this.setState({
+      editRowId: colorId
+    });
+  }
 
+  saveColor = (color) => {
+
+    const colorIndex = this.state.colors.findIndex(c => c.id === color.id);
+
+    this.setState({
+      colors: [
+        ...this.state.colors.slice(0, colorIndex),
+        color,
+        ...this.state.colors.slice(colorIndex + 1)
+      ],
+      editRowId: -1,
+    });
+
+  }
+
+  cancelColor = () => {
+    this.setState({
+      editRowId: -1,
+    });
   }
 
   render() {
 
     return <div>
       <ToolHeader headerText="Color Tool" />
-      <ColorTable colors={this.state.colors} onRemoveColor={this.removeColor} />
+      <ColorTable colors={this.state.colors} editRowId={this.state.editRowId}
+        onRemoveColor={this.removeColor} onEditColor={this.editColor}
+        onSaveColor={this.saveColor} onCancelColor={this.cancelColor} />
       <ColorForm buttonText="Add Color" onSubmitColor={this.addColor} />
     </div>;
   }

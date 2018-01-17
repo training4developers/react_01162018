@@ -6,7 +6,8 @@ export class ColorForm extends React.Component {
     super(props);
 
     this.state = {
-      color: '',
+      colorName: '',
+      colorHexCode: '',
     };
   }
 
@@ -17,19 +18,28 @@ export class ColorForm extends React.Component {
   }
 
   submitColor = () => {
-    this.props.onSubmitColor(this.state.color);
+    this.props.onSubmitColor({
+      name: this.state.colorName,
+      hexCode: this.state.colorHexCode,
+    });
 
     this.setState({
-      color: '',
+      colorName: '',
+      colorHexCode: '',
     });
   }
 
   render() {
     return <form>
       <div>
-        <label htmlFor="color-input">Color</label>
-        <input type="text" id="color-input" name="color"
-          value={this.state.color} onChange={this.onChange} />
+        <label htmlFor="color-name-input">Color Name:</label>
+        <input type="text" id="color-name-input" name="colorName"
+          value={this.state.colorName} onChange={this.onChange} />
+      </div>
+      <div>
+        <label htmlFor="color-hexcode-input">Color HexCode:</label>
+        <input type="color" id="color-hexcode-input" name="colorHexCode"
+          value={this.state.colorHexCode} onChange={this.onChange} />
       </div>
       <button type="button" onClick={this.submitColor}>{this.props.buttonText}</button>
     </form>;

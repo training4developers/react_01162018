@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import { ToolHeader } from './ToolHeader';
+import { ColorTable } from './ColorTable';
 import { ColorForm } from './ColorForm';
 
 export class ColorTool extends React.Component {
@@ -10,7 +11,6 @@ export class ColorTool extends React.Component {
 
     this.state = {
       colors: this.props.colors.concat(),
-
     };
   }
 
@@ -24,9 +24,7 @@ export class ColorTool extends React.Component {
 
     return <div>
       <ToolHeader headerText="Color Tool" />
-      <ul>
-        {this.state.colors.map(color => <li>{color}</li>)}
-      </ul>
+      <ColorTable colors={this.state.colors} />
       <ColorForm buttonText="Add Color" onSubmitColor={this.addColor} />
     </div>;
   }
